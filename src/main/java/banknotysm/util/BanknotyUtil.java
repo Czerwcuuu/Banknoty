@@ -60,10 +60,6 @@ public class BanknotyUtil {
         else return false;
     }
 
-    public static boolean isItemWithName(ItemStack item, Material type, String name) {
-        return item != null && item.getType() == type && item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().equals(name);
-    }
-
     public static void registerPermissions(){
         perms.add(new Permission(BANKNOT_GIVE_SELF_PERM,"Allows player to give Banknot", PermissionDefault.OP));
         perms.add(new Permission(BANKNOT_RELOAD_PERM,"Pozwala reloadowac plugin",PermissionDefault.OP));
