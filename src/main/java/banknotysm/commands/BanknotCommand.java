@@ -2,8 +2,6 @@ package banknotysm.commands;
 
 import banknotysm.BanknotySM;
 import banknotysm.util.BanknotyUtil;
-import net.milkbowl.vault.VaultEco;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
