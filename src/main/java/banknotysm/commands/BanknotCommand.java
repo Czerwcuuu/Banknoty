@@ -2,6 +2,8 @@ package banknotysm.commands;
 
 import banknotysm.BanknotySM;
 import banknotysm.util.BanknotyUtil;
+import net.milkbowl.vault.VaultEco;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,14 +23,21 @@ public class BanknotCommand implements CommandExecutor {
                         args[1].equalsIgnoreCase("10") || args[1].equalsIgnoreCase("20") || args[1].equalsIgnoreCase("50") || args[1].equalsIgnoreCase("100")) {
                         if (sender.hasPermission(BanknotyUtil.BANKNOT_GIVE_SELF_PERM)) {
 
-                        ItemStack banknot = BanknotyUtil.createBanknot(Integer.parseInt(args[0]));
+                        ItemStack banknot = BanknotyUtil.createBanknot(Integer.parseInt(args[1]));
                             if(args[0].equals("kup")) {
                                 p.getInventory().addItem(banknot);
+                                if(BanknotySM.getEconomy().has(p,Integer.parseInt(args[1]))){
+                                    BanknotySM.getEconomy().depositPlayer(p,-Integer.parseInt(args[1]));
+                                }
+                                else{
+                                    //brak hajsu
+                                }
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
                             }
                             else if (args[0].equals("sprzedaj")){
                                 if(p.getInventory().getItemInMainHand() == banknot) {
                                     p.getInventory().removeItem(banknot);
+                                    BanknotySM.getEconomy().depositPlayer(p,Integer.parseInt(args[1]));
                                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()));
                                 } else {
                                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoBanknotInHandMessage()));
