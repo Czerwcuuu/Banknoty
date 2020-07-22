@@ -12,8 +12,9 @@ public class Config {
     public static final String SELL_KEY = "locale.sellbanknot";
     public static final String BUY_KEY = "locale.buybanknot";
     public static final String RELOAD_KEY = "locale.reload";
+    public static final String NO_IN_HAND_KEY = "locale.noinhand";
 
-    private String noPermMessage, invalidPlayerMessage, onlyPlayersMessage, reloadMessage, sellBanknotMessage, buyBanknotMessage;
+    private String noPermMessage, invalidPlayerMessage, onlyPlayersMessage, reloadMessage, sellBanknotMessage, buyBanknotMessage, noBanknotInHandMessage;
 
     public Config(){
         setDefaults();
@@ -29,6 +30,7 @@ public class Config {
         sellBanknotMessage = config.getString(SELL_KEY,"&2%PLAYER% sprzedal banknot");
         buyBanknotMessage = config.getString(BUY_KEY,"&2%PLAYER% kupil banknot");
         reloadMessage = config.getString(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
+        noBanknotInHandMessage = config.getString(NO_IN_HAND_KEY,"&2Musisz trzymać banknot w dłoni!");
     }
 
     public void setDefaults(){
@@ -40,6 +42,7 @@ public class Config {
         config.addDefault(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
         config.addDefault(SELL_KEY,"&2%PLAYER% sprzedal banknot");
         config.addDefault(BUY_KEY,"&2%PLAYER% kupil banknot");
+        config.addDefault(NO_IN_HAND_KEY,"&2Musisz trzymać banknot w dłoni!");
 
         config.options().copyDefaults(true);
         BanknotySM.getInstance().saveConfig();
@@ -54,6 +57,7 @@ public class Config {
         config.set(RELOAD_KEY,reloadMessage);
         config.set(BUY_KEY,buyBanknotMessage);
         config.set(SELL_KEY,sellBanknotMessage);
+        config.set(NO_IN_HAND_KEY,noBanknotInHandMessage);
 
         BanknotySM.getInstance().saveConfig();
     }
@@ -101,4 +105,8 @@ public class Config {
     public void setSellBanknotMessage(String message){this.sellBanknotMessage = message;}
 
     public String getSellBanknotMessage(){return sellBanknotMessage;}
+
+    public void setNoInHandMessage(String message){this.noBanknotInHandMessage = message;}
+
+    public String getNoBanknotInHandMessage(){return noBanknotInHandMessage;}
 }
