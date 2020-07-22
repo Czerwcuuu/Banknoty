@@ -13,7 +13,7 @@ public class Config {
     public static final String BUY_KEY = "locale.buybanknot";
     public static final String RELOAD_KEY = "locale.reload";
 
-    private String noPermMessage, invalidPlayerMessage, onlyPlayersMessage, giveBanknotMessage,reloadMessage, sellBanknotMessage, buyBanknotMessage;
+    private String noPermMessage, invalidPlayerMessage, onlyPlayersMessage, reloadMessage, sellBanknotMessage, buyBanknotMessage;
 
     public Config(){
         setDefaults();
@@ -26,7 +26,6 @@ public class Config {
         noPermMessage = config.getString(NO_PERM_KEY,"&4Nie masz do tego permisji");
         invalidPlayerMessage = config.getString(INVALID_PLAYER_KEY,"&4To nie jest prawidłowy gracz!");
         onlyPlayersMessage = config.getString(ONLY_PLAYER_KEY,"Tylko gracz moze uzyc tej komendy");
-        giveBanknotMessage = config.getString(GIVE_KEY,"&2Daj banknot dla %PLAYER%!");
         sellBanknotMessage = config.getString(SELL_KEY,"&2%PLAYER% sprzedal banknot");
         buyBanknotMessage = config.getString(BUY_KEY,"&2%PLAYER% kupil banknot");
         reloadMessage = config.getString(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
@@ -38,7 +37,6 @@ public class Config {
         config.addDefault(NO_PERM_KEY,"&4Nie masz do tego permisji");
         config.addDefault(INVALID_PLAYER_KEY,"&4To nie jest prawidłowy gracz!");
         config.addDefault(ONLY_PLAYER_KEY,"Tylko gracz moze uzyc tej komendy");
-        config.addDefault(GIVE_KEY,"&2Daj banknot dla %PLAYER%!");
         config.addDefault(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
         config.addDefault(SELL_KEY,"&2%PLAYER% sprzedal banknot");
         config.addDefault(BUY_KEY,"&2%PLAYER% kupil banknot");
@@ -53,7 +51,6 @@ public class Config {
         config.set(NO_PERM_KEY,noPermMessage);
         config.set(INVALID_PLAYER_KEY,invalidPlayerMessage);
         config.set(ONLY_PLAYER_KEY,onlyPlayersMessage);
-        config.set(GIVE_KEY,giveBanknotMessage);
         config.set(RELOAD_KEY,reloadMessage);
         config.set(BUY_KEY,buyBanknotMessage);
         config.set(SELL_KEY,sellBanknotMessage);
@@ -87,14 +84,6 @@ public class Config {
 
     public String getOnlyPlayersMessage(){
         return onlyPlayersMessage;
-    }
-
-    public void setGiveBanknotMessage(String message){
-        this.giveBanknotMessage = message;
-    }
-
-    public String getGiveBanknotMessage(){
-        return giveBanknotMessage;
     }
 
     public void setReloadMessage(String message){
