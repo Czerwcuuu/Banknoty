@@ -32,7 +32,7 @@ public class Config {
         buyBanknotMessage = config.getString(BUY_KEY,"&2%PLAYER% kupil banknot");
         reloadMessage = config.getString(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
         noBanknotInHandMessage = config.getString(NO_IN_HAND_KEY,"&2Musisz trzymać banknot w dłoni!");
-        noMoneyMessage = config.getString(NO_IN_HAND_KEY,"&2Nie masz wystarczająco gotówki!");
+        noMoneyMessage = config.getString(NO_MONEY_KEY,"&2Nie masz wystarczająco gotówki!");
     }
 
     public void setDefaults(){

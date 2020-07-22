@@ -25,15 +25,16 @@ public class BanknotCommand implements CommandExecutor {
 
                         ItemStack banknot = BanknotyUtil.createBanknot(Integer.parseInt(args[1]));
                             if(args[0].equalsIgnoreCase("kup")) {
-                                p.getInventory().addItem(banknot);
-                                if(BanknotySM.getEconomy().has(p,Integer.parseInt(args[1]))){
-                                    BanknotySM.getEconomy().depositPlayer(p,-Integer.parseInt(args[1]));
+                                if(BanknotySM.getEconomy().getBalance(p)>=Integer.parseInt(args[1])){
+                                    p.getInventory().addItem(banknot);
+                                    BanknotySM.getEconomy().withdrawPlayer(p,Integer.parseInt(args[1]));
                                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
                                 }
                                 else{
                                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoMoneyMessage()));
                                 }
                             }
+                            //Need a change - need a method to compare ItemStack with customitem - equals don't work, isSimillar same
                             else if (args[0].equalsIgnoreCase("sprzedaj")){
                                 if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Banknot 1$") && p.getInventory().getItemInMainHand().getItemMeta().hasLore()) {
                                     ItemStack item = p.getInventory().getItemInMainHand();
