@@ -28,7 +28,7 @@ public class BanknotCommand implements CommandExecutor {
                                     BanknotySM.getEconomy().depositPlayer(p,-Integer.parseInt(args[1]));
                                 }
                                 else{
-                                    //brak hajsu
+                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoMoneyMessage()));
                                 }
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
                             }

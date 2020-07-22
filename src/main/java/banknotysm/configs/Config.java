@@ -13,8 +13,9 @@ public class Config {
     public static final String BUY_KEY = "locale.buybanknot";
     public static final String RELOAD_KEY = "locale.reload";
     public static final String NO_IN_HAND_KEY = "locale.noinhand";
+    public static final String NO_MONEY_KEY = "locale.nomoney";
 
-    private String noPermMessage, invalidPlayerMessage, onlyPlayersMessage, reloadMessage, sellBanknotMessage, buyBanknotMessage, noBanknotInHandMessage;
+    private String noPermMessage, invalidPlayerMessage, onlyPlayersMessage, reloadMessage, sellBanknotMessage,noMoneyMessage, buyBanknotMessage, noBanknotInHandMessage;
 
     public Config(){
         setDefaults();
@@ -31,6 +32,7 @@ public class Config {
         buyBanknotMessage = config.getString(BUY_KEY,"&2%PLAYER% kupil banknot");
         reloadMessage = config.getString(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
         noBanknotInHandMessage = config.getString(NO_IN_HAND_KEY,"&2Musisz trzymać banknot w dłoni!");
+        noMoneyMessage = config.getString(NO_IN_HAND_KEY,"&2Nie masz wystarczająco gotówki!");
     }
 
     public void setDefaults(){
@@ -43,6 +45,7 @@ public class Config {
         config.addDefault(SELL_KEY,"&2%PLAYER% sprzedal banknot");
         config.addDefault(BUY_KEY,"&2%PLAYER% kupil banknot");
         config.addDefault(NO_IN_HAND_KEY,"&2Musisz trzymać banknot w dłoni!");
+        config.addDefault(NO_MONEY_KEY,"&2Nie masz wystarczająco gotówki!");
 
         config.options().copyDefaults(true);
         BanknotySM.getInstance().saveConfig();
@@ -58,6 +61,7 @@ public class Config {
         config.set(BUY_KEY,buyBanknotMessage);
         config.set(SELL_KEY,sellBanknotMessage);
         config.set(NO_IN_HAND_KEY,noBanknotInHandMessage);
+        config.set(NO_MONEY_KEY,noMoneyMessage);
 
         BanknotySM.getInstance().saveConfig();
     }
@@ -109,4 +113,8 @@ public class Config {
     public void setNoInHandMessage(String message){this.noBanknotInHandMessage = message;}
 
     public String getNoBanknotInHandMessage(){return noBanknotInHandMessage;}
+
+    public void setNoMoneyMessage(String message){this.noMoneyMessage = message;}
+
+    public String getNoMoneyMessage(){return noMoneyMessage;}
 }
