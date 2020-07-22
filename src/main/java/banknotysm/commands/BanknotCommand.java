@@ -25,14 +25,13 @@ public class BanknotCommand implements CommandExecutor {
                             if(args[0].equals("kup")) {
                                 p.getInventory().addItem(banknot);
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-
                             }
                             else if (args[0].equals("sprzedaj")){
                                 if(p.getInventory().getItemInMainHand() == banknot) {
                                     p.getInventory().removeItem(banknot);
                                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()));
                                 } else {
-                                    //Nie ma banknotu w ręce
+                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoBanknotInHandMessage()));
                                 }
                             }
                         } else {
