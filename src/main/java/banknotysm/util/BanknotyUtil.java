@@ -26,6 +26,7 @@ public class BanknotyUtil {
     public static ItemStack createBanknot(int nominal){
         ItemStack banknot = new ItemStack(Material.PAPER);
         ItemMeta meta = banknot.getItemMeta();
+
         ArrayList<String> lorebanknotu = new ArrayList<>();
         if(nominal == 1 ||nominal == 2 || nominal ==5 ||nominal ==10 ||nominal ==20 ||nominal == 50 || nominal == 100){
             lorebanknotu.add("Banknot o wartości " + nominal + "$");
