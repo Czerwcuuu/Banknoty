@@ -16,13 +16,13 @@ public class BanknotCommand implements CommandExecutor {
 
         if (args.length >= 1) {
 // /banknot kup 1
-            if (args.length == 3) {
+            if (args.length == 2) {
                     if (args[1].equalsIgnoreCase("1") || args[1].equalsIgnoreCase("2") || args[1].equalsIgnoreCase("5") ||
                         args[1].equalsIgnoreCase("10") || args[1].equalsIgnoreCase("20") || args[1].equalsIgnoreCase("50") || args[1].equalsIgnoreCase("100")) {
                         if (sender.hasPermission(BanknotyUtil.BANKNOT_GIVE_SELF_PERM)) {
 
                         ItemStack banknot = BanknotyUtil.createBanknot(Integer.parseInt(args[1]));
-                            if(args[0].equals("kup")) {
+                            if(args[0].equalsIgnoreCase("kup")) {
                                 p.getInventory().addItem(banknot);
                                 if(BanknotySM.getEconomy().has(p,Integer.parseInt(args[1]))){
                                     BanknotySM.getEconomy().depositPlayer(p,-Integer.parseInt(args[1]));
@@ -32,7 +32,7 @@ public class BanknotCommand implements CommandExecutor {
                                 }
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
                             }
-                            else if (args[0].equals("sprzedaj")){
+                            else if (args[0].equalsIgnoreCase("sprzedaj")){
                                 if(p.getInventory().getItemInMainHand() == banknot) {
                                     p.getInventory().removeItem(banknot);
                                     BanknotySM.getEconomy().depositPlayer(p,Integer.parseInt(args[1]));
