@@ -21,7 +21,6 @@ public class BanknotCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Config config = BanknotySM.getInternalConfig();
         Player p = (Player) sender;
-        String lore = p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0);
         PlayerInventory inv = p.getInventory();
         if (args.length >= 1) {
 // /banknot kup 1
@@ -49,6 +48,7 @@ public class BanknotCommand implements CommandExecutor {
                     }
             }
             else if (args[0].equalsIgnoreCase("sprzedaj")){
+                String lore = p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0);
                 if (p.getInventory().getItemInMainHand().getType() != Material.AIR && lore != null) {
                     String mess = ChatColor.translateAlternateColorCodes('&', config.getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName());
                     ItemStack item = p.getInventory().getItemInMainHand();
