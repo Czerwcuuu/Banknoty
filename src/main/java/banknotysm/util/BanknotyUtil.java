@@ -29,8 +29,7 @@ public class BanknotyUtil {
 
         ArrayList<String> lorebanknotu = new ArrayList<>();
         if(nominal == 1 ||nominal == 2 || nominal ==5 ||nominal ==10 ||nominal ==20 ||nominal == 50 || nominal == 100){
-            lorebanknotu.add("Banknot o wartości " + nominal + "$");
-            lorebanknotu.add("Numer Banknotu:" + numer);
+            lorebanknotu.add("Banknot o wartości "+nominal+"$");
 
             meta.setLore(lorebanknotu);
             meta.setDisplayName("Banknot "+nominal+"$");
@@ -42,7 +41,6 @@ public class BanknotyUtil {
         else {
 
             lorebanknotu.add("Banknot o wartości 1$");
-            lorebanknotu.add("Numer Banknotu:" + numer);
 
             meta.setLore(lorebanknotu);
             meta.setDisplayName("Banknot 1$");
