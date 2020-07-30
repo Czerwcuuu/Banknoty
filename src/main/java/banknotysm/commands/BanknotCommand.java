@@ -1,13 +1,16 @@
 package banknotysm.commands;
 
 import banknotysm.BanknotySM;
+import banknotysm.configs.Config;
 import banknotysm.util.BanknotyUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
 
@@ -16,91 +19,77 @@ public class BanknotCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        Config config = BanknotySM.getInternalConfig();
         Player p = (Player) sender;
-
+        String lore = p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0);
+        PlayerInventory inv = p.getInventory();
         if (args.length >= 1) {
 // /banknot kup 1
             if (args.length == 2) {
                     if (args[1].equalsIgnoreCase("1") || args[1].equalsIgnoreCase("2") || args[1].equalsIgnoreCase("5") ||
                         args[1].equalsIgnoreCase("10") || args[1].equalsIgnoreCase("20") || args[1].equalsIgnoreCase("50") || args[1].equalsIgnoreCase("100")) {
-                        if (sender.hasPermission(BanknotyUtil.BANKNOT_GIVE_SELF_PERM)) {
+                        if (p.hasPermission(BanknotyUtil.BANKNOT_GIVE_SELF_PERM)) {
 
                         ItemStack banknot = BanknotyUtil.createBanknot(Integer.parseInt(args[1]));
                             if(args[0].equalsIgnoreCase("kup")) {
                                 if(BanknotySM.getEconomy().getBalance(p)>=Integer.parseInt(args[1])){
-                                    p.getInventory().addItem(banknot);
+                                    inv.addItem(banknot);
                                     BanknotySM.getEconomy().withdrawPlayer(p,Integer.parseInt(args[1]));
-                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
+                                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getBuyBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
                                 }
                                 else{
-                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoMoneyMessage()));
+                                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getNoMoneyMessage()));
                                 }
                             }
                             //Need a change - need a method to compare ItemStack with customitem - equals don't work, isSimillar same
                         } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoPermMessage()));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getNoPermMessage()));
 
                         }
                     }
             }
             else if (args[0].equalsIgnoreCase("sprzedaj")){
-                if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 1$")) {
+                if (p.getInventory().getItemInMainHand().getType() != Material.AIR && lore != null) {
+                    String mess = ChatColor.translateAlternateColorCodes('&', config.getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName());
                     ItemStack item = p.getInventory().getItemInMainHand();
                     int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,1 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 2$")){
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,2 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 5$")){
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,5 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 10$")){
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,10 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 20$")){
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,20 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 50$")){
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,50 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else if(p.getInventory().getItemInMainHand().getItemMeta().getLore().get(0).equals("Banknot o wartości 100$")){
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    int howmany = item.getAmount();
-                    p.getInventory().removeItem(item);
-                    BanknotySM.getEconomy().depositPlayer(p,100 * howmany);
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getSellBanknotMessage()).replaceAll("%PLAYER%", p.getDisplayName()));
-                }
-                else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getNoBanknotInHandMessage()));
+                    if (lore.equals("Banknot o wartości 1$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, howmany);
+                        p.sendMessage(mess);
+                    } else if (lore.equals("Banknot o wartości 2$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, 2 * howmany);
+                        p.sendMessage(mess);
+                    } else if (lore.equals("Banknot o wartości 5$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, 5 * howmany);
+                        p.sendMessage(mess);
+                    } else if (lore.equals("Banknot o wartości 10$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, 10 * howmany);
+                        p.sendMessage(mess);
+                    } else if (lore.equals("Banknot o wartości 20$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, 20 * howmany);
+                        p.sendMessage(mess);
+                    } else if (lore.equals("Banknot o wartości 50$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, 50 * howmany);
+                        p.sendMessage(mess);
+                    } else if (lore.equals("Banknot o wartości 100$")) {
+                        inv.removeItem(item);
+                        BanknotySM.getEconomy().depositPlayer(p, 100 * howmany);
+                        p.sendMessage(mess);
+                    } else {
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getNoBanknotInHandMessage()));
+                    }
                 }
             }
             else if (args[0].equalsIgnoreCase("reload")) {
-                if (sender.hasPermission(BanknotyUtil.BANKNOT_RELOAD_PERM)) {
-                    BanknotySM.getInternalConfig().reloadConfig();
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', BanknotySM.getInternalConfig().getReloadMessage()));
+                if (p.hasPermission(BanknotyUtil.BANKNOT_RELOAD_PERM)) {
+                    config.reloadConfig();
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getReloadMessage()));
 
                     return true;
                 }
