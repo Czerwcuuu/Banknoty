@@ -1,7 +1,9 @@
 package banknotysm.util;
 
 import banknotysm.BanknotySM;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -32,7 +34,7 @@ public class BanknotyUtil {
             lorebanknotu.add("Banknot o wartości "+nominal+"$");
 
             meta.setLore(lorebanknotu);
-            meta.setDisplayName("Banknot "+nominal+"$");
+            meta.setDisplayName(ChatColor.DARK_GREEN+"Banknot "+ ChatColor.DARK_RED+nominal+"$");
 
             banknot.setItemMeta(meta);
             numer++;
