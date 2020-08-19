@@ -42,7 +42,7 @@ public class Config {
         config.addDefault(INVALID_PLAYER_KEY,"&4To nie jest prawidłowy gracz!");
         config.addDefault(ONLY_PLAYER_KEY,"Tylko gracz moze uzyc tej komendy");
         config.addDefault(RELOAD_KEY,"&2[Config Banknotow Zreloadowany!");
-        config.addDefault(SELL_KEY,"&2%PLAYER% sprzedal banknot");
+        config.addDefault(SELL_KEY,"Sprzedales banknot! Twoje konto zostało doładowane!");
         config.addDefault(BUY_KEY,"&2%PLAYER% kupil banknot");
         config.addDefault(NO_IN_HAND_KEY,"&2Musisz trzymać banknot w dłoni!");
         config.addDefault(NO_MONEY_KEY,"&2Nie masz wystarczająco gotówki!");
