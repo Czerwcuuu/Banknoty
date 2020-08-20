@@ -1,4 +1,3 @@
-﻿
 package banknotysm.commands;
 
 import banknotysm.BanknotySM;
@@ -36,7 +35,7 @@ public class BanknotCommand implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("kup")) {
             if (!p.hasPermission(BanknotyUtil.BANKNOT_GIVE_SELF_PERM)) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.RED+ config.getNoPermMessage()));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.RED + config.getNoPermMessage()));
                 return false;
             } //err brak permisji
 
@@ -54,7 +53,7 @@ public class BanknotCommand implements CommandExecutor {
 
             try {
                 price = Integer.parseInt(args[1]);
-                if(price < 1) throw new Exception();
+                if (price < 1) throw new Exception();
             } catch (Exception ee) {
                 p.sendMessage(ChatColor.RED + "Podaj dodatnią liczbę jako cenę!");
                 return false;
@@ -74,10 +73,10 @@ public class BanknotCommand implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("sprzedaj")) {
             String lore = "";
-            try{
-                 lore = Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta().getLore()).get(0);
-                if(!p.getInventory().getItemInMainHand().getType().toString().equals("PAPER")) throw new Exception();
-            } catch (Exception e){
+            try {
+                lore = Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta().getLore()).get(0);
+                if (!p.getInventory().getItemInMainHand().getType().toString().equals("PAPER")) throw new Exception();
+            } catch (Exception e) {
 
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.RED + config.getNoBanknotInHandMessage()));
                 return false;

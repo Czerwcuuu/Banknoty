@@ -30,35 +30,15 @@ public class BanknotyUtil {
         ItemMeta meta = banknot.getItemMeta();
 
         ArrayList<String> lorebanknotu = new ArrayList<>();
-        if(nominal == 1 ||nominal == 2 || nominal ==5 ||nominal ==10 ||nominal ==20 ||nominal == 50 || nominal == 100){
-            lorebanknotu.add("Banknot o wartości "+nominal+"$");
+        lorebanknotu.add("Banknot o wartości "+nominal+"$");
 
-            meta.setLore(lorebanknotu);
-            meta.setDisplayName(ChatColor.DARK_GREEN+"Banknot "+ ChatColor.DARK_RED+nominal+"$");
-
-            banknot.setItemMeta(meta);
-            numer++;
-            return banknot;
-        }
-        else {
-
-            lorebanknotu.add("Banknot o wartości 1$");
-
-            meta.setLore(lorebanknotu);
-            meta.setDisplayName("Banknot 1$");
+           meta.setLore(lorebanknotu);
+           meta.setDisplayName(ChatColor.DARK_GREEN+"Banknot "+ ChatColor.DARK_RED+nominal+"$");
 
             banknot.setItemMeta(meta);
             numer++;
             return banknot;
-        }
-    }
 
-    public static boolean isBanknot(ItemStack stack){
-        if(stack ==null || stack.getType() != Material.PAPER || !stack.hasItemMeta() || !stack.getItemMeta().hasLore()) return false;
-
-        else if (stack.getItemMeta().getDisplayName().equals("Banknot o wartości xx")) return true;
-
-        else return false;
     }
 
     public static void registerPermissions(){

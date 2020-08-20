@@ -2,6 +2,8 @@ package banknotysm;
 
 import banknotysm.commands.BanknotCommand;
 import banknotysm.configs.Config;
+import banknotysm.events.SellBanknotOnCrouchRightclick;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import banknotysm.util.BanknotyUtil;
@@ -28,13 +30,13 @@ public final class BanknotySM extends JavaPlugin {
     //Vault statics
     private static Economy econ = null;
     private static Permission perms = null;
-    private static Chat chat = null;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         plugin = this;
         this.getCommand("banknoty").setExecutor(new BanknotCommand());
+        Bukkit.getPluginManager().registerEvents(new SellBanknotOnCrouchRightclick(),this);
         config = new Config();
         BanknotyUtil.registerPermissions();
 
@@ -44,7 +46,6 @@ public final class BanknotySM extends JavaPlugin {
             return;
         }
         setupPermissions();
-        setupChat();
     }
 
     @Override
@@ -81,12 +82,6 @@ public final class BanknotySM extends JavaPlugin {
         return econ != null;
     }
 
-    private boolean setupChat() {
-        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-        chat = rsp.getProvider();
-        return chat != null;
-    }
-
     private boolean setupPermissions() {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
@@ -101,7 +96,4 @@ public final class BanknotySM extends JavaPlugin {
         return perms;
     }
 
-    public static Chat getChat() {
-        return chat;
-    }
 }

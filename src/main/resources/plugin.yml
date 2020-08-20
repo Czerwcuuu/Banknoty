@@ -1,7 +1,6 @@
 name: BanknotySM
 version: ${project.version}
 main: banknotysm.BanknotySM
-api-version: 1.13
 commands:
   banknoty:
     description: Banknoty Test
